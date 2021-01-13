@@ -34,6 +34,15 @@
           </b-col>
         </b-row>
       </b-col>
+      <b-col cols="12">
+        <b-row class="justify-content-md-center">
+          <b-col cols="8">
+           <b-input-group prepend="title" class="mt-3">
+              <b-form-input v-model="title2" placeholder="Enter a new todo..." @keyup.enter="addTodo2"></b-form-input>
+            </b-input-group>
+          </b-col>
+        </b-row>
+      </b-col>
     </b-row>
   </div>
 </template>
@@ -53,6 +62,7 @@ export default {
   data: function () {
     return {
       title: "",
+      title2: "",
       todolist: [],
     };
   },
@@ -75,6 +85,18 @@ export default {
           this.loadTodo();
         });
       this.title = "";
+    },
+    addTodo2() {
+      const data = {
+        username: "Thomas",
+        title: this.title2,
+      };
+      axios
+        .post(`https://arcane-hollows-66380.herokuapp.com/todos`, data)
+        .then(() => {
+          this.loadTodo();
+        });
+      this.title2 = "";
     },
     removeTodo(id) {
       axios
